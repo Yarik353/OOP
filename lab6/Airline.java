@@ -1,5 +1,7 @@
 package lab6;
 
+import lab8.EmptyPlaneSetException;
+
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -18,7 +20,10 @@ public class Airline {
         newarr[n] = x;
         return  newarr;
     }
-    public  Plane[] get_range(Plane [] x){
+    public  Plane[] get_range(Plane [] x) throws EmptyPlaneSetException {
+        if (x.length==0){
+            throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");
+        }
         boolean tr = true;
         int a = 0;
         int b = 0;
@@ -55,7 +60,41 @@ public class Airline {
                 }
             }
         }
-        return Plane.fuelRange(x, a, b);
+        return fuelRange(x, a, b);
+
+
+    }
+    public static int count_capacity(Plane [] x){
+
+        int capacity_counter = 0;
+        for(int i = 0; i < x.length; i++){
+            capacity_counter += x[i].capacity;
+        }
+        return capacity_counter;
+    }
+    public static int count_carrying_capacity(Plane [] x){
+        int carrying_capacity_counter = 0;
+        for(int i = 0; i < x.length; i++){
+            carrying_capacity_counter += x[i].carrying_capacity;
+        }
+        return carrying_capacity_counter;
+    }
+    public static Plane[] fuelRange(Plane[] x, int a, int b) throws EmptyPlaneSetException {
+        if (x.length==0){
+            throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");
+        }
+        int length = 0;
+        Plane [] fuel_range = new Plane[0];
+        for (int i = 0; i < x.length; i++) {
+            if (x[i].fuel_consumption >= a && x[i].fuel_consumption <= b) {
+                fuel_range = Airline.addPlane(fuel_range, x[i], length++);
+            }
+        }
+        if (length == 0) {
+            return null ;
+        } else {
+            return fuel_range;
+        }
     }
 }
 class sort_range_of_flight implements Comparator<Plane>{

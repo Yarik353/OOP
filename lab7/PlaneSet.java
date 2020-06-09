@@ -1,22 +1,126 @@
 package lab7;
-import lab6.Plane;
 
-import java.lang.reflect.Array;
+import lab6.Plane;
+import lab8.EmptyPlaneSetException;
+
 import java.util.*;
 
 public class PlaneSet implements Set<Plane> {
+
+    private List s = new List();
     private int size = 0;
-    private List list = new List();
-    public PlaneSet(){
 
-    }
-    public PlaneSet(Plane o){
-        add(o);
-    }
-    public PlaneSet(Collection<Plane> collection) {
-        addAll(collection);
+    public PlaneSet() {
     }
 
+    public PlaneSet(Plane stn) {
+        add(stn);
+    }
+
+    public PlaneSet(Collection<? extends Plane> stn) {
+        addAll(stn);
+    }
+
+    @Override
+    public boolean add(Plane stn) {
+        boolean flag = true;
+        Node t = s.getHead();
+        while (t != null) {
+            if (t.data == stn) {
+                flag = false;
+                break;
+            }
+            t = t.next;
+        }
+        if (flag) {
+            s.addBack(stn);
+            size++;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Plane> c) {
+        Iterator<? extends Plane> iterator = c.iterator();
+        boolean flag = false;
+        while (iterator.hasNext()) {
+            flag = add((Plane) iterator.next());
+        }
+        return flag;
+    }
+
+    @Override
+    public void clear() {
+        s = null;
+        s = new List();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        boolean flag = add((Plane) o);
+        if (flag) {
+            s.delEl((Plane) o);
+        }
+        return flag == false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        boolean flag = true;
+        Iterator<Plane> iterator = (Iterator<Plane>) c.iterator();
+        while (iterator.hasNext()) {
+            flag = contains((Plane) iterator.next());
+            if (flag == false) {
+                break;
+            }
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return s.getHead() == null;
+    }
+
+    @Override
+    public Iterator<Plane> iterator() {
+        return new PlaneIterator();
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        if (contains(o)) {
+            s.delEl((Plane) o);
+            size--;
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+
+        boolean flag = false;
+        for (Object object : c) {
+            flag = remove(object);
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        boolean flag = true;
+        Iterator<Plane> iterator = iterator();
+        while (iterator.hasNext()) {
+            Plane Plane = (Plane) iterator.next();
+            flag = c.contains(Plane);
+            if (flag == false)
+                remove(Plane);
+        }
+        return flag == false;
+    }
 
     @Override
     public int size() {
@@ -24,103 +128,135 @@ public class PlaneSet implements Set<Plane> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return size==0;
-    }
-
-    @Override
-    public boolean contains(Object o) {
+    public Object[] toArray() {
+        int i = 0;
+        Plane[] mas = new Plane[size];
         Iterator<Plane> iterator = iterator();
         while (iterator.hasNext()) {
-            if (o.equals(iterator.next())) {
-                return true;
-            }
+            mas[i] = iterator.next();
+            i++;
+
         }
-        return false;
+        return mas;
     }
 
     @Override
-    public Iterator<Plane> iterator() {
-        return new Iterator<Plane>() {
-            private int index = 0;
-            @Override
-            public boolean hasNext() {
-                return index < size;
-            }
-
-            @Override
-            public Plane next() {
-                return list.next();
-            }
-        };
-    }
-
-    @Override
-    public Object[] toArray() {
-        Plane[] arr = new Plane[size];
-        for(int i =0; i<size; i++){
-            arr[i] = list.next();
-        }
-        return arr;
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
+    public <T> T[] toArray(T[] array) {
         return null;
     }
 
-    /**
-     *
-     * @param Plane музична композиція для додавання в колекцію
-     * @return чи змінилася колекція
-     * @throws WrongТривалістьValueException коли композиція коротша за 10 секунд
-     */
-    @Override
-    public boolean add(Plane o) {
-        if (Plane.віддайТривалість() < MIN_TRACK_TIME_LENGTH) {
-            throw new WrongТривалістьValueException("Проблема в тому, що тривалість композиції < 10, і не можна " +
-                    "додати у альбом такий трек");
+    class PlaneIterator implements Iterator {
+        private Node thisElement = s.getHead();
+
+        @Override
+        public boolean hasNext() {
+            return thisElement != null;
         }
-        list.add(o);
-        size++;
-        return true;
-    }
 
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends Plane> c) {
-        /*Iterator<? extends Plane> iterator = c.iterator();
-        while (iterator.hasNext()) {
-            add(iterator.next());
-        }*/
-        for (Plane Plane : c) {
-            add(Plane);
+        @Override
+        public Plane next() {
+            Plane s = thisElement.data;
+            thisElement = thisElement.next;
+            return s;
         }
-        //todo fix return value
-        return false;
+
+        @Override
+        public void remove() {
+            s.delEl(thisElement.data);
+        }
     }
 
+
+    public PlaneSet get_range() throws EmptyPlaneSetException {
+        if (size==0){
+            throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");
+        }
+        boolean tr = true;
+        int a = 0;
+        int b = 0;
+        System.out.println("Знайдемо літак у компанії, що відповідає заданому діапазону споживання пального.");
+        while (tr) {
+            try {
+                System.out.println("Введіть нижню межу діапазону(від):");
+                Scanner scan = new Scanner(System.in);
+                String scan_a = scan.nextLine();
+                a = Integer.parseInt(scan_a);
+                tr = false;
+            } catch (NumberFormatException e) {
+                System.out.println("Введіть число!!!");
+                tr = true;
+            }
+        }
+        tr = true;
+        while (tr) {
+            try {
+                System.out.println("Введіть верхню межу діапазону(до):");
+                Scanner scan = new Scanner(System.in);
+                String scan_b = scan.nextLine();
+                b = Integer.parseInt(scan_b);
+                tr = false;
+            } catch (NumberFormatException e) {
+                System.out.println("Введіть число!!!");
+                tr = true;
+            } finally {
+                if (!tr) {
+                    if (a >= b) {
+                        System.out.println("Верхня межа має бути більшою ніж нижня!!!");
+                        tr = true;
+                    }
+                }
+            }
+        }
+        return fuelRange(a, b);
+
+
+    }
+    public  int count_capacity() {
+        int capacity_counter = 0;
+        Iterator iterator = iterator();
+        while (iterator.hasNext()){
+            Plane nxt = (Plane) iterator.next();
+            capacity_counter += nxt.capacity;
+        }
+        return capacity_counter;
+    }
+
+    public  int count_carrying_capacity() {
+        int carrying_capacity_counter = 0;
+        Iterator iterator = iterator();
+        while (iterator.hasNext()){
+            Plane nxt = (Plane) iterator.next();
+            carrying_capacity_counter += nxt.carrying_capacity;
+        }
+        return carrying_capacity_counter;
+    }
+
+    public PlaneSet fuelRange(int a, int b) throws EmptyPlaneSetException {
+        if (size==0){
+            throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");
+        }
+        Plane[] x = (Plane[]) toArray();
+        int length = 0;
+        PlaneSet fuel_range = new PlaneSet();
+       for (int i = 0; i < x.length; i++) {
+            if (x[i].fuel_consumption >= a && x[i].fuel_consumption <= b) {
+                fuel_range.add(x[i]);
+                length++;
+            }
+        }
+        if (length == 0) {
+            return null;
+        } else {
+            return fuel_range;
+        }
+    }
+    public Plane [] sort_rf (){
+        Plane[] x = (Plane[]) toArray();
+        Arrays.sort(x, new sort_range_of_flight());
+        return x;
+    }
+}
+class sort_range_of_flight implements Comparator<Plane>{
     @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
+    public int compare( Plane o1, Plane o2){return (o2.range_of_flight - o1.range_of_flight);}
 }

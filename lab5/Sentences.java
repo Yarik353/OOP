@@ -18,7 +18,6 @@ public class Sentences{
                     punctuation = addPuncts(counter_puncts, punctuation, splited_sentence[i]);
                     counter_puncts+=1;
                 }
-
             }
             else{
                 words = addWord(counter_words, words, splited_sentence[i]);
