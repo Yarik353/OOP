@@ -3,7 +3,7 @@ package lab7;
 import lab6.An_225_Mria;
 import lab6.Boeing;
 import lab6.Plane;
-import lab6.Private_plane;
+import lab6.PrivatePlane;
 
 
 
@@ -21,7 +21,7 @@ public class Main {
         ps2.add(boeing);
         ps2.add(new An_225_Mria( "Mрія",20, 200000, 2000, 300));
         ps2.add(boeing);
-        ps2.add(new Private_plane("Приватний літак MZ-390",10, 2000, 4000, 50));
+        ps2.add(new PrivatePlane("Приватний літак MZ-390",10, 2000, 4000, 50));
         System.out.println("Літаки:");
         Iterator iterator = ps2.iterator();
         while(iterator.hasNext()){
@@ -37,16 +37,16 @@ public class Main {
             Iterator iter = fuel_range.iterator();
             while(iter.hasNext()){
                 Plane pl = (Plane) iter.next();
-                System.out.println(pl+ " діапазон споживання пального: " + pl.fuel_consumption);
+                System.out.println(pl+ " діапазон споживання пального: " + pl.fuelConsumption);
             }}
         System.out.print("Загальна місткість літаків: ");
-        System.out.println(ps2.count_capacity());
+        System.out.println(ps2.countCapacity());
         System.out.print("Загальна вантажопідйомність літаків: ");
-        System.out.println(ps2.count_carrying_capacity());
+        System.out.println(ps2.countCarryingCapacity());
         System.out.println("Літаки, сортовані за дальністю польоту:");
         Plane [] sorted_by_rf = ps2.sort_rf();
         for(Plane obj : sorted_by_rf){
-            System.out.println(obj + " дальність польоту: " + obj.range_of_flight);
+            System.out.println(obj + " дальність польоту: " + obj.rangeOfFlight);
         }
 
     }

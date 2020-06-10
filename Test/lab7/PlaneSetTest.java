@@ -2,11 +2,9 @@ package lab7;
 
 import lab6.Boeing;
 import lab6.Plane;
-import lab6.Private_plane;
+import lab6.PrivatePlane;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PlaneSetTest {
 
@@ -17,7 +15,7 @@ public class PlaneSetTest {
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
-        Assert.assertEquals(expected_capacity, ps1.count_capacity());
+        Assert.assertEquals(expected_capacity, ps1.countCapacity());
     }
 
     @Test
@@ -27,14 +25,14 @@ public class PlaneSetTest {
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
-        Assert.assertEquals(expected_carrying_capacity, ps1.count_carrying_capacity());
+        Assert.assertEquals(expected_carrying_capacity, ps1.countCarryingCapacity());
     }
 
     @Test
     public void fuelRange() {
         Boeing boeing1 = new Boeing("Боінг 337-A",300, 15000, 3000, 100);
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
-        Private_plane private_plane = new Private_plane("Боінг 339-A",500, 10000, 3020, 120);
+        PrivatePlane private_plane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
         ps1.add(private_plane);
@@ -127,7 +125,7 @@ public class PlaneSetTest {
     public void removeAll() {
         Boeing boeing1 = new Boeing("Боінг 337-A",300, 15000, 3000, 100);
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
-        Private_plane private_plane = new Private_plane("Боінг 339-A",500, 10000, 3020, 120);
+        PrivatePlane private_plane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
         ps1.add(private_plane);
@@ -142,7 +140,7 @@ public class PlaneSetTest {
     public void retainAll() {
         Boeing boeing1 = new Boeing("Боінг 337-A",300, 15000, 3000, 100);
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
-        Private_plane private_plane = new Private_plane("Боінг 339-A",500, 10000, 3020, 120);
+        PrivatePlane private_plane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
         ps1.add(private_plane);

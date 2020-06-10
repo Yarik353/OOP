@@ -6,22 +6,24 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class Airline {
-    public Plane [] airlines;
+    public Plane[] airlines;
     public int counter;
 
-    public void add_new_plane(Plane x){
+    public void addNewPlane(Plane x) {
         this.airlines = addPlane(this.airlines, x, counter++);
     }
-    public static Plane [] addPlane(Plane[] arr, Plane x, int n){
+
+    public static Plane[] addPlane(Plane[] arr, Plane x, int n) {
         int i;
         Plane newarr[] = new Plane[n + 1];
         for (i = 0; i < n; i++)
             newarr[i] = arr[i];
         newarr[n] = x;
-        return  newarr;
+        return newarr;
     }
-    public  Plane[] get_range(Plane [] x) throws EmptyPlaneSetException {
-        if (x.length==0){
+
+    public Plane[] getRange(Plane[] x) throws EmptyPlaneSetException {
+        if (x.length == 0) {
             throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");
         }
         boolean tr = true;
@@ -51,9 +53,9 @@ public class Airline {
             } catch (NumberFormatException e) {
                 System.out.println("Введіть число!!!");
                 tr = true;
-            }finally {
+            } finally {
                 if (!tr) {
-                    if (a>=b) {
+                    if (a >= b) {
                         System.out.println("Верхня межа має бути більшою ніж нижня!!!");
                         tr = true;
                     }
@@ -61,43 +63,47 @@ public class Airline {
             }
         }
         return fuelRange(x, a, b);
-
-
     }
-    public static int count_capacity(Plane [] x){
 
-        int capacity_counter = 0;
-        for(int i = 0; i < x.length; i++){
-            capacity_counter += x[i].capacity;
+    public int countCapacity(Plane[] x) {
+
+        int capacityCounter = 0;
+        for (int i = 0; i < x.length; i++) {
+            capacityCounter += x[i].capacity;
         }
-        return capacity_counter;
+        return capacityCounter;
     }
-    public static int count_carrying_capacity(Plane [] x){
+
+    public int countCarryingCapacity(Plane[] x) {
         int carrying_capacity_counter = 0;
-        for(int i = 0; i < x.length; i++){
-            carrying_capacity_counter += x[i].carrying_capacity;
+        for (int i = 0; i < x.length; i++) {
+            carrying_capacity_counter += x[i].carryingCapacity;
         }
         return carrying_capacity_counter;
     }
+
     public static Plane[] fuelRange(Plane[] x, int a, int b) throws EmptyPlaneSetException {
-        if (x.length==0){
+        if (x.length == 0) {
             throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");
         }
         int length = 0;
-        Plane [] fuel_range = new Plane[0];
+        Plane[] fuel_range = new Plane[0];
         for (int i = 0; i < x.length; i++) {
-            if (x[i].fuel_consumption >= a && x[i].fuel_consumption <= b) {
+            if (x[i].fuelConsumption >= a && x[i].fuelConsumption <= b) {
                 fuel_range = Airline.addPlane(fuel_range, x[i], length++);
             }
         }
         if (length == 0) {
-            return null ;
+            return null;
         } else {
             return fuel_range;
         }
     }
 }
-class sort_range_of_flight implements Comparator<Plane>{
+
+class sortRangeOfFlight implements Comparator<Plane> {
     @Override
-    public int compare( Plane o1, Plane o2){return (o2.range_of_flight - o1.range_of_flight);}
+    public int compare(Plane o1, Plane o2) {
+        return (o2.rangeOfFlight - o1.rangeOfFlight);
+    }
 }

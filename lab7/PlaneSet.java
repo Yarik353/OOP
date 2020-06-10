@@ -61,7 +61,7 @@ public class PlaneSet implements Set<Plane> {
         if (flag) {
             s.delEl((Plane) o);
         }
-        return flag == false;
+        return !flag;
     }
 
     @Override
@@ -208,10 +208,8 @@ public class PlaneSet implements Set<Plane> {
             }
         }
         return fuelRange(a, b);
-
-
     }
-    public  int count_capacity() {
+    public  int countCapacity() {
         int capacity_counter = 0;
         Iterator iterator = iterator();
         while (iterator.hasNext()){
@@ -221,12 +219,12 @@ public class PlaneSet implements Set<Plane> {
         return capacity_counter;
     }
 
-    public  int count_carrying_capacity() {
+    public  int countCarryingCapacity() {
         int carrying_capacity_counter = 0;
         Iterator iterator = iterator();
         while (iterator.hasNext()){
             Plane nxt = (Plane) iterator.next();
-            carrying_capacity_counter += nxt.carrying_capacity;
+            carrying_capacity_counter += nxt.carryingCapacity;
         }
         return carrying_capacity_counter;
     }
@@ -239,7 +237,7 @@ public class PlaneSet implements Set<Plane> {
         int length = 0;
         PlaneSet fuel_range = new PlaneSet();
        for (int i = 0; i < x.length; i++) {
-            if (x[i].fuel_consumption >= a && x[i].fuel_consumption <= b) {
+            if (x[i].fuelConsumption >= a && x[i].fuelConsumption <= b) {
                 fuel_range.add(x[i]);
                 length++;
             }
@@ -252,11 +250,11 @@ public class PlaneSet implements Set<Plane> {
     }
     public Plane [] sort_rf (){
         Plane[] x = (Plane[]) toArray();
-        Arrays.sort(x, new sort_range_of_flight());
+        Arrays.sort(x, new sortRangeOfFlight());
         return x;
     }
 }
-class sort_range_of_flight implements Comparator<Plane>{
+class sortRangeOfFlight implements Comparator<Plane>{
     @Override
-    public int compare( Plane o1, Plane o2){return (o2.range_of_flight - o1.range_of_flight);}
+    public int compare( Plane o1, Plane o2){return (o2.rangeOfFlight - o1.rangeOfFlight);}
 }

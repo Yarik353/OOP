@@ -6,10 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         Airline airline = new Airline();
-        airline.add_new_plane(new Boeing("Боінг 337-A",300, 15000, 3000, 100));
-        airline.add_new_plane(new An_225_Mria( "Mрія",20, 200000, 2000, 300));
-        airline.add_new_plane(new Private_plane("Приватний літак MZ-390",10, 2000, 4000, 50));
-        Plane [] fuel_range = airline.get_range(airline.airlines);
+        airline.addNewPlane(new Boeing("Боінг 337-A",300, 15000, 3000, 100));
+        airline.addNewPlane(new An_225_Mria( "Mрія",20, 200000, 2000, 300));
+        airline.addNewPlane(new PrivatePlane("Приватний літак MZ-390",10, 2000, 4000, 50));
+        Plane [] fuel_range = airline.getRange(airline.airlines);
         System.out.println("Літаки у компанії, що відповідають заданому діапазону споживання пального.");
         if (fuel_range==null){
             System.out.println("Таких літаків немає!");
@@ -19,11 +19,11 @@ public class Main {
             System.out.println(fuel_range[i].name);
         }}
         System.out.print("Загальна місткість авіакомпані: ");
-        System.out.println(airline.count_capacity(airline.airlines));
+        System.out.println(airline.countCapacity(airline.airlines));
         System.out.print("Загальна вантажопідйомність авіакомпані: ");
-        System.out.println(airline.count_carrying_capacity(airline.airlines));
+        System.out.println(airline.countCarryingCapacity(airline.airlines));
         System.out.println("Літаки компанії, сортовані за дальністю польоту:");
-        Arrays.sort(airline.airlines, new sort_range_of_flight());
+        Arrays.sort(airline.airlines, new sortRangeOfFlight());
         for(int i = 0; i < airline.airlines.length; i++){
             System.out.println(airline.airlines[i].name);
         }

@@ -12,9 +12,9 @@ public class Main {
             new Boeing("Боінг 337-A",300, 15000, 0, 100);
             PlaneSet ps = new PlaneSet();
             System.out.print("Загальна місткість літаків: ");
-            System.out.println(ps.count_capacity());
+            System.out.println(ps.countCapacity());
             System.out.print("Загальна вантажопідйомність літаків: ");
-            System.out.println(ps.count_carrying_capacity());
+            System.out.println(ps.countCarryingCapacity());
             PlaneSet fuel_range = ps.get_range();
             System.out.println("Літаки у компанії, що відповідають заданому діапазону споживання пального.");
             if (fuel_range==null){
@@ -24,7 +24,7 @@ public class Main {
                 Iterator iter = fuel_range.iterator();
                 while(iter.hasNext()){
                     Plane pl = (Plane) iter.next();
-                    System.out.println(pl+ " діапазон споживання пального: " + pl.fuel_consumption);
+                    System.out.println(pl+ " діапазон споживання пального: " + pl.fuelConsumption);
                 }}
         }
         catch (EmptyPlaneSetException e){

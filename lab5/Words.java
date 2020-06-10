@@ -5,10 +5,10 @@ public class Words  {
     public String wordd;
     public Words(String word){
         wordd = word;
-        String [] splited_word = word.split("");
-        letter = new Letters[splited_word.length];
-        for (int i = 0; i < splited_word.length; i++) {
-            letter[i] = new Letters(splited_word[i]);
+        String [] splitedWord = word.split("");
+        letter = new Letters[splitedWord.length];
+        for (int i = 0; i < splitedWord.length; i++) {
+            letter[i] = new Letters(splitedWord[i]);
         }
     }
 }
