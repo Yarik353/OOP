@@ -14,7 +14,7 @@ public class Node{
         this.next = next;
     }
 
-    public Plane getData() {
+    public Plane getData () {
         return data;
     }
 

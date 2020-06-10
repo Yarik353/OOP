@@ -13,6 +13,7 @@ public class Plane {
         if (cap <= 0 | carCap <= 0 | rOfFlight <= 0 | fuelCons <= 0) {
             throw new WrongValueException("Один або більше параметрів було задано не коректно!");
         }
+
         name = nm;
         capacity = cap;
         carryingCapacity = carCap;

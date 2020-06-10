@@ -228,7 +228,6 @@ public class PlaneSet implements Set<Plane> {
         }
         return carrying_capacity_counter;
     }
-
     public PlaneSet fuelRange(int a, int b) throws EmptyPlaneSetException {
         if (size==0){
             throw new EmptyPlaneSetException("Неможливо знайти діапазон оскільки даний масив пустий!");

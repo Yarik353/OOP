@@ -58,5 +58,4 @@ public class List {
             t = t.next;
         }
     }
-
 }

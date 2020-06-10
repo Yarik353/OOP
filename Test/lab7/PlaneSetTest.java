@@ -164,6 +164,4 @@ public class PlaneSetTest {
         Plane[] planes = {boeing1};
         Assert.assertArrayEquals(planes, ps1.toArray());
     }
-
-
 }

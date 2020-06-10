@@ -1,6 +1,6 @@
 package lab7;
 
-import lab6.An_225_Mria;
+import lab6.An225Mria;
 import lab6.Boeing;
 import lab6.Plane;
 import lab6.PrivatePlane;
@@ -19,7 +19,7 @@ public class Main {
         ps.remove(other_boeing);
         PlaneSet ps2 = new PlaneSet(ps);
         ps2.add(boeing);
-        ps2.add(new An_225_Mria( "Mрія",20, 200000, 2000, 300));
+        ps2.add(new An225Mria( "Mрія",20, 200000, 2000, 300));
         ps2.add(boeing);
         ps2.add(new PrivatePlane("Приватний літак MZ-390",10, 2000, 4000, 50));
         System.out.println("Літаки:");

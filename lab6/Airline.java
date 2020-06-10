@@ -102,6 +102,7 @@ public class Airline {
 }
 
 class sortRangeOfFlight implements Comparator<Plane> {
+
     @Override
     public int compare(Plane o1, Plane o2) {
         return (o2.rangeOfFlight - o1.rangeOfFlight);
