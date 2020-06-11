@@ -32,10 +32,10 @@ public class PlaneSetTest {
     public void fuelRange() {
         Boeing boeing1 = new Boeing("Боінг 337-A",300, 15000, 3000, 100);
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
-        PrivatePlane private_plane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
+        PrivatePlane privatePlane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
-        ps1.add(private_plane);
+        ps1.add(privatePlane);
         PlaneSet fuel_range = ps1.fuelRange(0, 400);
         PlaneSet expected_range = new PlaneSet(boeing1);
         expected_range.add(boeing2);
@@ -125,27 +125,27 @@ public class PlaneSetTest {
     public void removeAll() {
         Boeing boeing1 = new Boeing("Боінг 337-A",300, 15000, 3000, 100);
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
-        PrivatePlane private_plane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
+        PrivatePlane privatePlane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
-        ps1.add(private_plane);
+        ps1.add(privatePlane);
         PlaneSet ps2 = new PlaneSet(boeing1);
         ps2.add(boeing2);
         ps1.removeAll(ps2);
-        PlaneSet removed_all = new PlaneSet(private_plane);
-        Assert.assertTrue(ps1.equals(removed_all));
+        PlaneSet removedAll = new PlaneSet(privatePlane);
+        Assert.assertTrue(ps1.equals(removedAll));
     }
 
     @Test
     public void retainAll() {
         Boeing boeing1 = new Boeing("Боінг 337-A",300, 15000, 3000, 100);
         Boeing boeing2 = new Boeing("Боінг 338-A",400, 10000, 3020, 120);
-        PrivatePlane private_plane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
+        PrivatePlane privatePlane = new PrivatePlane("Боінг 339-A",500, 10000, 3020, 120);
         PlaneSet ps1 = new PlaneSet(boeing1);
         ps1.add(boeing2);
-        ps1.add(private_plane);
+        ps1.add(privatePlane);
         PlaneSet ps2 = new PlaneSet(boeing2);
-        ps2.add(private_plane);
+        ps2.add(privatePlane);
         ps1.retainAll(ps2);
         Assert.assertTrue(ps1.equals(ps2));
     }

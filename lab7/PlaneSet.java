@@ -42,9 +42,9 @@ public class PlaneSet implements Set<Plane> {
     @Override
     public boolean addAll(Collection<? extends Plane> c) {
         Iterator<? extends Plane> iterator = c.iterator();
-        boolean flag = false;
+        boolean flag = true;
         while (iterator.hasNext()) {
-            flag = add((Plane) iterator.next());
+            flag &= add((Plane) iterator.next());
         }
         return flag;
     }
