@@ -26,7 +26,7 @@ public class Sentences{
         }
         qunt=counter_words;
     }
-    public static Punctuations[] addPuncts(int n, Punctuations[] arr, String x)
+    public Punctuations[] addPuncts(int n, Punctuations[] arr, String x)
     {
         int i;
         Punctuations[] newarr = new Punctuations[n + 1];
@@ -36,7 +36,7 @@ public class Sentences{
         newarr[n] = new Punctuations(x);
         return newarr;
     }
-    public static Words[] addWord(int n, Words[] arr, String x)
+    public  Words[] addWord(int n, Words[] arr, String x)
     {
         int i;
         Words[] newarr = new Words[n + 1];
