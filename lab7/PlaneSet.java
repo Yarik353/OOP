@@ -51,7 +51,7 @@ public class PlaneSet implements Set<Plane> {
 
     @Override
     public void clear() {
-        s = null;
+        size = 0;
         s = new List();
     }
 
